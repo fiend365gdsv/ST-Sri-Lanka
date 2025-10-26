@@ -87,6 +87,10 @@ public class StaffService {
         staffRepo.delete(staff);
         return "Staff with ID " + id + " deleted successfully.";
     }
+    public Staff getStaffByUsername(String username) {
+        return staffRepo.findByUsername(username).orElse(null);
+    }
+
 
     @Transactional
     public Staff updateStaff(Long id, Staff updatedData) {

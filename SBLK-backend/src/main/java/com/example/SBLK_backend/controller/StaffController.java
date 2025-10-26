@@ -40,6 +40,19 @@ public class StaffController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", ex.getMessage()));
         }
     }
+    @GetMapping("/profile/{username}")
+    public ResponseEntity<?> getStaffProfile(@PathVariable String username) {
+        try {
+            Staff staff = staffService.getStaffByUsername(username);
+            if (staff == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Staff not found"));
+            }
+            return ResponseEntity.ok(staff);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", ex.getMessage()));
+        }
+    }
+
 
     @PostMapping("/register")
     public ResponseEntity<?> registerStaff(@RequestParam String role, @RequestBody String jsonData) {

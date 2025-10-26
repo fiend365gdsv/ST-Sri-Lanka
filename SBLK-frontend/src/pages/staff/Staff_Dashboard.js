@@ -2,10 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import './staff_dashboard.css';
 import { useNavigate } from 'react-router-dom';
 import { GoogleMap, Marker, Polyline, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
+import axios from 'axios';
 
 const containerStyle = {
   width: '100%',
-  height: '500px', // increased height for better visibility
+  height: '500px',
   borderRadius: '10px',
 };
 
@@ -32,8 +33,41 @@ const StaffDashboard = () => {
   const busNumber = '138';
   const LOCATION_UPDATE_ENDPOINT = 'http://localhost:8080/api/location/update';
 
+  // ✅ Staff Profile
+  const [staffProfile, setStaffProfile] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    mobileNumber: '',
+  });
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [profileError, setProfileError] = useState('');
+
+  // ✅ Get username from localStorage
+  const username = localStorage.getItem('username');
+
   const formatCoord = (num) => (num === null || num === undefined ? null : Number(num).toFixed(5));
 
+  // Fetch staff profile
+  useEffect(() => {
+    if (!username) return;
+    const fetchProfile = async () => {
+      try {
+        setLoadingProfile(true);
+        const res = await axios.get(`http://localhost:8080/api/staff/profile/${username}`);
+        setStaffProfile(res.data);
+        setProfileError('');
+      } catch (err) {
+        console.error('Error fetching profile:', err);
+        setProfileError('Failed to load profile');
+      } finally {
+        setLoadingProfile(false);
+      }
+    };
+    fetchProfile();
+  }, [username]);
+
+  // ✅ GPS Functions
   const handleStartGps = () => {
     if (!navigator.geolocation) return alert('Geolocation not supported.');
     if (isGpsActive) return;
@@ -157,7 +191,6 @@ const StaffDashboard = () => {
                 zoom={12}
                 onLoad={(map) => (mapRef.current = map)}
               >
-                {/* Marker */}
                 <Marker
                   position={{ lat: currentLat, lng: currentLon }}
                   icon={{
@@ -166,22 +199,16 @@ const StaffDashboard = () => {
                     anchor: new window.google.maps.Point(17, 34),
                   }}
                 />
-
-                {/* InfoWindow with position */}
-                <InfoWindow
-                  position={{ lat: currentLat, lng: currentLon }}
-                >
+                <InfoWindow position={{ lat: currentLat, lng: currentLon }}>
                   <div>
                     Current Bus Location<br />
                     {formatCoord(currentLat)}, {formatCoord(currentLon)}
                   </div>
                 </InfoWindow>
-
                 <Polyline
                   path={routePath}
                   options={{ strokeColor: 'blue', strokeOpacity: 0.7, strokeWeight: 4 }}
                 />
-
                 <RecenterMap lat={currentLat} lon={currentLon} mapRef={mapRef} />
               </GoogleMap>
             ) : (
@@ -203,7 +230,7 @@ const StaffDashboard = () => {
           </div>
         </div>
 
-        {/* Staff Profile moved down */}
+        {/* ✅ Dynamic Staff Profile */}
         <div className="profile-section" style={{ marginTop: '20px' }}>
           <div className="section-header">
             <span className="icon">👤</span>
@@ -211,11 +238,17 @@ const StaffDashboard = () => {
           </div>
 
           <div className="profile-card">
-            <div className="profile-info">
-              <p><span className="profile-icon">👤</span> <strong>Saman Jayawardena</strong></p>
-              <p><span className="profile-icon">📧</span> samanj@email.com</p>
-              <p><span className="profile-icon">📱</span> +94 77 123 4567</p>
-            </div>
+            {loadingProfile ? (
+              <p>Loading profile...</p>
+            ) : profileError ? (
+              <p className="error">{profileError}</p>
+            ) : (
+              <div className="profile-info">
+                <p><span className="profile-icon">👤</span> <strong>{staffProfile.firstName} {staffProfile.lastName}</strong></p>
+                <p><span className="profile-icon">📧</span> {staffProfile.email}</p>
+                <p><span className="profile-icon">📱</span> {staffProfile.mobileNumber}</p>
+              </div>
+            )}
           </div>
 
           <button className="btn btn-edit" onClick={() => navigate('/edit_staff_profile')}>Edit Profile</button>
