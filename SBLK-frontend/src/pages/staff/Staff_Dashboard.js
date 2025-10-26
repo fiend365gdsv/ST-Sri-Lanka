@@ -215,25 +215,27 @@ const StaffDashboard = () => {
   }, [currentTrip]);
 
   const handleMarkAttendance = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        alert("Please login again");
-        return;
-      }
-
-      const res = await axios.post(
-        "http://localhost:8080/api/staff/mark-attendance",
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      alert(res.data);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to mark attendance");
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please login again");
+      return;
     }
-  };
+
+    const res = await axios.post(
+    "http://localhost:8080/api/staff/mark-attendance",
+    {},
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  alert(res.data);
+} catch (err) {
+  console.error(err); // See full details in console
+  if (err.response) alert(err.response.data);
+  else if (err.request) alert("Backend not reachable (CORS or offline)");
+  else alert("Error: " + err.message);
+}
+};
+
 
 
   return (

@@ -9,63 +9,68 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    if (!username || !password) {
-      alert("⚠️ Please enter both username and password.");
-      return;
-    }
+  e.preventDefault();
+  if (!username || !password) {
+    alert("⚠️ Please enter both username and password.");
+    return;
+  }
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (response.ok) {
-        // Store user info if needed
-        localStorage.setItem("userRole", data.role);
-        localStorage.setItem("username", username);
-
-        // Redirect based on role or redirectUrl
-        if (data.redirectUrl) {
-          navigate(data.redirectUrl);
-        } else {
-          // fallback role-based redirection
-          switch (data.role.toUpperCase()) {
-  case "ADMIN":
-  case "OFFICER":
-    navigate("/admin/dashboard");
-    break;
-  case "DRIVER":
-  case "CONDUCTOR":
-    navigate("/staff/dashboard");  // ✅ match App.js
-    break;
-  case "PASSENGER":
-    navigate("/passenger/dashboard");
-    break;
-  default:
-    alert("⚠️ Unknown role: " + data.role);
-    console.log("Login response:", data);
-
-}
-
-        }
+    if (response.ok) {
+      // ✅ Store JWT token in localStorage
+      if (data.token) {
+        localStorage.setItem("token", data.token);
       } else {
-        alert("❌ Login failed: " + (data.message || data));
+        console.warn("No token found in response:", data);
       }
-    } catch (error) {
-      alert("⚠️ Network error: " + error.message);
-    } finally {
-      setLoading(false);
+
+      // ✅ Store user info
+      localStorage.setItem("userRole", data.role);
+      localStorage.setItem("username", username);
+
+      // ✅ Redirect based on role or redirectUrl
+      if (data.redirectUrl) {
+        navigate(data.redirectUrl);
+      } else {
+        switch (data.role?.toUpperCase()) {
+          case "ADMIN":
+          case "OFFICER":
+            navigate("/admin/dashboard");
+            break;
+          case "DRIVER":
+          case "CONDUCTOR":
+            navigate("/staff/dashboard");
+            break;
+          case "PASSENGER":
+            navigate("/passenger/dashboard");
+            break;
+          default:
+            alert("⚠️ Unknown role: " + data.role);
+            console.log("Login response:", data);
+        }
+      }
+    } else {
+      alert("❌ Login failed: " + (data.message || data));
     }
-  };
+  } catch (error) {
+    alert("⚠️ Network error: " + error.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="auth-container">
