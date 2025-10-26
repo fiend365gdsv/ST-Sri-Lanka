@@ -1,56 +1,53 @@
 package com.example.SBLK_backend.controller;
 
-import com.example.SBLK_backend.model.Staff;
 import com.example.SBLK_backend.security.JwtUtil;
+import com.example.SBLK_backend.model.Attendance;
 import com.example.SBLK_backend.service.AttendanceService;
-import com.example.SBLK_backend.service.StaffService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/staff")
-@CrossOrigin(origins = "http://localhost:3000")
 public class AttendanceController {
 
-    @Autowired
-    private AttendanceService attendanceService;
+    private final AttendanceService attendanceService;
+    private final JwtUtil jwtUtil;
 
-    @Autowired
-    private StaffService staffService;
+    public AttendanceController(AttendanceService attendanceService, JwtUtil jwtUtil) {
+        this.attendanceService = attendanceService;
+        this.jwtUtil = jwtUtil;
+    }
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private String extractTokenFromHeader(String header) {
+        if (header == null || !header.startsWith("Bearer ")) {
+            return null;
+        }
+        return header.substring(7);
+    }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/mark-attendance")
-    public ResponseEntity<?> markAttendance(@RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> markAttendance(@RequestHeader(name = "Authorization", required = false) String authHeader) {
         try {
-            if (token.startsWith("Bearer ")) {
-                token = token.substring(7);
-            }
-
-            if (!jwtUtil.validateToken(token)) {
-                return ResponseEntity.status(401).body("Invalid or expired token");
+            String token = extractTokenFromHeader(authHeader);
+            if (token == null || !jwtUtil.validateToken(token)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or missing token");
             }
 
             String username = jwtUtil.extractUsername(token);
-            Staff staff = staffService.getStaffByUsername(username);
 
-            if (staff == null) {
-                return ResponseEntity.status(404).body("Staff not found");
-            }
+            Attendance saved = attendanceService.markAttendanceForUsername(username);
 
-            String result = attendanceService.markAttendance(
-                    staff.getFirstName() + " " + staff.getLastName(),
-                    staff.getMobileNumber(),
-                    staff.getEmail()
-            );
-
-            return ResponseEntity.ok(result);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().body("Error marking attendance");
+            return ResponseEntity.ok("Attendance marked at " + saved.getMarkedAt().toString());
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        } catch (IllegalStateException ex) {
+            // already marked for today
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to mark attendance");
         }
     }
 }
