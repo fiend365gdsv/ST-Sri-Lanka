@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/ST-Sri-Lanka/static/css/main.600f5e2d.css",
-    "main.js": "/ST-Sri-Lanka/static/js/main.65a373ec.js",
+    "main.js": "/ST-Sri-Lanka/static/js/main.b8e1098e.js",
     "static/js/453.066cb9dc.chunk.js": "/ST-Sri-Lanka/static/js/453.066cb9dc.chunk.js",
     "static/media/1_sQ9uJ3FFLpWe5mJHovv-zw.jpg": "/ST-Sri-Lanka/static/media/1_sQ9uJ3FFLpWe5mJHovv-zw.63c7596dbba34ec8f031.jpg",
     "static/media/logo.svg": "/ST-Sri-Lanka/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/ST-Sri-Lanka/index.html",
     "main.600f5e2d.css.map": "/ST-Sri-Lanka/static/css/main.600f5e2d.css.map",
-    "main.65a373ec.js.map": "/ST-Sri-Lanka/static/js/main.65a373ec.js.map",
+    "main.b8e1098e.js.map": "/ST-Sri-Lanka/static/js/main.b8e1098e.js.map",
     "453.066cb9dc.chunk.js.map": "/ST-Sri-Lanka/static/js/453.066cb9dc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.600f5e2d.css",
-    "static/js/main.65a373ec.js"
+    "static/js/main.b8e1098e.js"
   ]
 }
