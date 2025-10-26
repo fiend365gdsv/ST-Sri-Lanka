@@ -25,6 +25,16 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleService.addSchedule(dto));
 
     }
+    // Get current trip for logged-in staff
+    @GetMapping("/current/{username}")
+    public ResponseEntity<ScheduleResponseDto> getCurrentTrip(@PathVariable String username) {
+        ScheduleResponseDto dto = scheduleService.getCurrentTripByStaffUsername(username);
+        if (dto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(dto);
+    }
+
 
     @GetMapping
     public ResponseEntity<List<ScheduleResponseDto>> getAllSchedules() {
