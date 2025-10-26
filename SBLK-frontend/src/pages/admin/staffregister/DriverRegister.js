@@ -82,7 +82,7 @@ const DriverRegister = () => {
       if (response.ok) {
         alert('Driver registered successfully! Credentials sent to email.');
         console.log('Registration data:', result);
-        navigate("/staff/dashboard");
+        navigate("/loginpage");
       } else {
         alert('Registration failed: ' + (result.error || 'Unknown error'));
       }

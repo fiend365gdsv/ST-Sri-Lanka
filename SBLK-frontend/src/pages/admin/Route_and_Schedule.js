@@ -87,7 +87,7 @@ const AddSchedule = () => {
         const data = await response.json();
         alert("✅ Schedule added successfully!");
         console.log("Added Schedule:", data);
-        navigate("/admindashboard");
+        navigate("/admin/dashboard");
       } else {
         const errorText = await response.text();
         alert("❌ Failed to add schedule: " + errorText);
