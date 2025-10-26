@@ -33,6 +33,15 @@ public class DepotController {
             return ResponseEntity.status(500).body(Map.of("error", "Could not create depot"));
         }
     }
+    // Search depots by fromLocation and destination
+    @GetMapping("/search")
+    public ResponseEntity<List<DepotResponseDto>> searchDepots(
+            @RequestParam String fromLocation,
+            @RequestParam String destination) {
+        List<DepotResponseDto> depots = depotService.searchDepots(fromLocation, destination);
+        return ResponseEntity.ok(depots);
+    }
+
 
     // Get all depots
     @GetMapping

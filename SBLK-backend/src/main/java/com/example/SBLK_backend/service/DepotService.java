@@ -33,6 +33,13 @@ public class DepotService {
                 .orElseThrow(() -> new IllegalArgumentException("Depot not found with id: " + id));
         return mapToDto(depot);
     }
+    public List<DepotResponseDto> searchDepots(String fromLocation, String destination) {
+        return depotRepository.findByFromLocationIgnoreCaseAndDestinationIgnoreCase(fromLocation, destination)
+                .stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
 
     public List<DepotResponseDto> getAllDepots() {
         return depotRepository.findAll().stream()

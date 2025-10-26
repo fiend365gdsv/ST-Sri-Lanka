@@ -120,3 +120,37 @@ textarea {
   background-color: #48bb78;
   box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
 }
+/* Inputs & Textareas */
+input,
+select,
+textarea {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8); /* slightly more opaque */
+  font-size: 14px;
+  color: #000000; /* dark text for readability */
+  outline: none;
+  backdrop-filter: blur(10px);
+}
+
+/* Placeholder text */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: rgba(0, 0, 0, 0.674);
+}
+
+/* Dropdown options */
+select option {
+  background-color: rgba(255, 255, 255, 0.95); /* fully visible background */
+  color: #000000; /* readable text */
+}
+
+/* Hover/focus effect */
+input:focus,
+select:focus,
+textarea:focus {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}

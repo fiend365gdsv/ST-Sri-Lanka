@@ -1,40 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import { GoogleMap, Marker, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
 import './passengerdashboard.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// Custom bus icon for map
-const busIcon = new L.Icon({
-  iconUrl: 'https://cdn-icons-png.flaticon.com/512/61/61088.png',
-  iconSize: [35, 35],
-});
+const containerStyle = {
+  width: '100%',
+  height: '300px',
+  borderRadius: '10px',
+};
+
+const center = {
+  lat: 6.9271,
+  lng: 79.8612,
+};
 
 const PassengerDashboard = () => {
   const navigate = useNavigate();
+  
+  // Depot search state
   const [fromLocation, setFromLocation] = useState('Current Location');
   const [toDestination, setToDestination] = useState('');
+  const [availableDepots, setAvailableDepots] = useState([]);
+
+  // Booking search state
   const [bookingFrom, setBookingFrom] = useState('Galle');
   const [bookingTo, setBookingTo] = useState('Colombo');
   const [boardingPoint, setBoardingPoint] = useState('Rathgama');
   const [travelDate, setTravelDate] = useState('2025-09-29');
   const [availableBuses, setAvailableBuses] = useState([]);
 
+  const [selectedBus, setSelectedBus] = useState(null);
+
   // Profile states
   const [profile, setProfile] = useState(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
   const [profileError, setProfileError] = useState('');
 
-  // Get username dynamically from localStorage
   const username = localStorage.getItem('username');
 
-  // Example bus coordinates
   const buses = [
     { id: 1, lat: 6.9271, lng: 79.8612, name: 'Bus 138A' },
     { id: 2, lat: 6.9301, lng: 79.8702, name: 'Bus 138B' },
   ];
+
+  // Load Google Maps API
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
 
   // Fetch passenger profile
   useEffect(() => {
@@ -55,13 +68,26 @@ const PassengerDashboard = () => {
     fetchProfile();
   }, [username]);
 
-  // Search available buses
+  // 🔍 Depot search
+  const handleFindBusSearch = async () => {
+    try {
+      const res = await axios.get('http://localhost:8080/api/depots/search', {
+        params: { fromLocation, destination: toDestination },
+      });
+      setAvailableDepots(res.data); // Use separate state
+    } catch (err) {
+      console.error('Error searching depots:', err);
+      alert('❌ Failed to fetch depots. Please check backend connection.');
+    }
+  };
+
+  // Booking search
   const handleSearchBuses = async () => {
     try {
       const res = await axios.get(`http://localhost:8080/api/bookings/search`, {
         params: { from: bookingFrom, to: bookingTo, date: travelDate },
       });
-      setAvailableBuses(res.data);
+      setAvailableBuses(res.data); // Booking search has its own state
     } catch (err) {
       console.error('Error fetching available buses:', err);
       alert('❌ Failed to search buses. Check backend connection.');
@@ -98,7 +124,8 @@ const PassengerDashboard = () => {
       </div>
 
       <div className="content-grid">
-        {/* Find Your Bus Section */}
+
+        {/* Find Your Bus Section (Depot search) */}
         <div className="card find-bus-card">
           <div className="card-header">
             <span className="icon">🔍</span>
@@ -111,7 +138,7 @@ const PassengerDashboard = () => {
                 className="input-field"
                 value={fromLocation}
                 onChange={(e) => setFromLocation(e.target.value)}
-                placeholder="From: Current Location"
+                placeholder="From: Enter Departure Location"
               />
             </div>
             <div className="input-group-inline">
@@ -122,33 +149,25 @@ const PassengerDashboard = () => {
                 onChange={(e) => setToDestination(e.target.value)}
                 placeholder="To: Enter Destination"
               />
-              <button className="btn-search">Search</button>
+              <button className="btn-search" onClick={handleFindBusSearch}>
+                Search
+              </button>
             </div>
 
-            {/* Example bus routes */}
-            <div className="bus-route">
-              <div className="route-header">
-                <span className="route-number">Route 138 - Colombo to Kandy</span>
-                <span className="arrival-time">Arrives in 8 min</span>
+            {/* Show depot search results */}
+            {availableDepots.length > 0 ? (
+              <div className="bus-results-grid">
+                {availableDepots.map((bus, index) => (
+                  <div key={index} className="bus-tile">
+                    <h3>{bus.busNumber}</h3>
+                    <p><strong>From:</strong> {bus.fromLocation}</p>
+                    <p><strong>To:</strong> {bus.destination}</p>
+                  </div>
+                ))}
               </div>
-              <div className="route-details">
-                <span>Next Bus</span>
-                <span>Available Seats: 12/40</span>
-              </div>
-              <button className="btn-track">Track</button>
-            </div>
-
-            <div className="bus-route">
-              <div className="route-header">
-                <span className="route-number">Route 245 - Express Service</span>
-                <span className="arrival-time">Arrives in 13 min</span>
-              </div>
-              <div className="route-details">
-                <span>Next Bus</span>
-                <span>Available Seats: 25/40</span>
-              </div>
-              <button className="btn-track">Track</button>
-            </div>
+            ) : (
+              <p style={{ color: 'white', marginTop: '10px' }}>No buses found for this route.</p>
+            )}
           </div>
         </div>
 
@@ -226,21 +245,30 @@ const PassengerDashboard = () => {
           <div className="card-body tracking-body">
             <div className="live-badge">LIVE</div>
             <div className="map-placeholder">
-              <MapContainer
-                center={[6.9271, 79.8612]}
-                zoom={13}
-                style={{ height: '300px', width: '100%', borderRadius: '10px' }}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {buses.map((bus) => (
-                  <Marker key={bus.id} position={[bus.lat, bus.lng]} icon={busIcon}>
-                    <Popup>{bus.name}</Popup>
-                  </Marker>
-                ))}
-              </MapContainer>
+              {isLoaded && (
+                <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
+                  {buses.map((bus) => (
+                    <Marker
+                      key={bus.id}
+                      position={{ lat: bus.lat, lng: bus.lng }}
+                      onClick={() => setSelectedBus(bus)}
+                      icon={{
+                        url: 'https://cdn-icons-png.flaticon.com/512/61/61088.png',
+                        scaledSize: new window.google.maps.Size(35, 35),
+                      }}
+                    />
+                  ))}
+
+                  {selectedBus && (
+                    <InfoWindow
+                      position={{ lat: selectedBus.lat, lng: selectedBus.lng }}
+                      onCloseClick={() => setSelectedBus(null)}
+                    >
+                      <div>{selectedBus.name}</div>
+                    </InfoWindow>
+                  )}
+                </GoogleMap>
+              )}
               <div className="eta-box">
                 <p className="eta-label">ETA: 8 minutes</p>
                 <button className="btn-alert">Set Alert (1km away)</button>
