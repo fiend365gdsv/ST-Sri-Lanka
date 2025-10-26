@@ -17,7 +17,17 @@ public class Location {
     private LocalDateTime updatedAt;
 
     private String fromLocation;   // added
-    private String destination;    // added
+    private String destination;
+    private boolean trackingActive = true; // default true
+
+    public boolean isTrackingActive() {
+        return trackingActive;
+    }
+
+    public void setTrackingActive(boolean trackingActive) {
+        this.trackingActive = trackingActive;
+    }
+
 
     // getters and setters
     public Long getId() { return id; }

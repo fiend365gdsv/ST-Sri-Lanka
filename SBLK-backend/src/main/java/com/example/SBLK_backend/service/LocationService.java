@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import java.util.List;
+
 @Service
 public class LocationService {
 
@@ -18,6 +20,11 @@ public class LocationService {
     public LocationService(LocationRepository locationRepository, DepotRepository depotRepository) {
         this.locationRepository = locationRepository;
         this.depotRepository = depotRepository;
+    }
+    public List<Location> getAllActiveBuses() {
+        return locationRepository.findAll().stream()
+                .filter(Location::isTrackingActive)
+                .toList();
     }
 
     public Location updateLocation(String busNumber, double latitude, double longitude) {
@@ -39,4 +46,12 @@ public class LocationService {
     public Optional<Location> getLatestLocation(String busNumber) {
         return locationRepository.findTopByBusNumberOrderByUpdatedAtDesc(busNumber);
     }
+    public void stopTracking(String busNumber) {
+        locationRepository.findTopByBusNumberOrderByUpdatedAtDesc(busNumber)
+                .ifPresent(location -> {
+                    location.setTrackingActive(false);
+                    locationRepository.save(location);
+                });
+    }
+
 }

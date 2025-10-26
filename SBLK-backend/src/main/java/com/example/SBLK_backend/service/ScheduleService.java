@@ -76,4 +76,39 @@ public class ScheduleService {
                 .map(s -> s.getFirstName() + " " + s.getLastName())
                 .collect(Collectors.toList());
     }
+    // Get current trip details for logged-in staff
+    public ScheduleResponseDto getCurrentTripByStaffUsername(String username) {
+        Staff staff = staffRepository.findAll().stream()
+                .filter(s -> s.getUsername().equalsIgnoreCase(username))
+                .findFirst()
+                .orElse(null);
+
+        if (staff == null) return null;
+
+        // Find schedule where staff is driver or conductor and today's date
+        Schedule schedule = scheduleRepository.findAll().stream()
+                .filter(sch -> (sch.getDriverName().equalsIgnoreCase(staff.getFirstName() + " " + staff.getLastName()) ||
+                        sch.getConductorName().equalsIgnoreCase(staff.getFirstName() + " " + staff.getLastName())))
+                .findFirst()
+                .orElse(null);
+
+        if (schedule == null) return null;
+
+        ScheduleResponseDto dto = new ScheduleResponseDto();
+        BeanUtils.copyProperties(schedule, dto);
+
+        // Get depot details
+        Depot depot = depotRepository.findAll().stream()
+                .filter(d -> d.getBusNumber().equalsIgnoreCase(schedule.getBusNumber()))
+                .findFirst()
+                .orElse(null);
+
+        if (depot != null) {
+            dto.setDepotName(depot.getDepotName());
+            dto.setRoute(depot.getRoute() + " (" + depot.getFromLocation() + " → " + depot.getDestination() + ")");
+        }
+
+        return dto;
+    }
+
 }
