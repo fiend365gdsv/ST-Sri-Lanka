@@ -214,6 +214,28 @@ const StaffDashboard = () => {
     return () => clearInterval(interval);
   }, [currentTrip]);
 
+  const handleMarkAttendance = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please login again");
+        return;
+      }
+
+      const res = await axios.post(
+        "http://localhost:8080/api/staff/mark-attendance",
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      alert(res.data);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to mark attendance");
+    }
+  };
+
+
   return (
     <div className="container">
       <h1 className="dashboard-title">Smart Public Bus Management System</h1>
@@ -261,7 +283,7 @@ const StaffDashboard = () => {
             <button className="btn btn-danger" onClick={handleStopGps}>
               Stop GPS Sharing
             </button>
-            <button className="btn btn-primary">Mark Attendance</button>
+            <button className="btn btn-primary" onClick={handleMarkAttendance}>Mark Attendance</button>
             <button className="btn btn-danger">Notify Unavailability</button>
           </div>
 
