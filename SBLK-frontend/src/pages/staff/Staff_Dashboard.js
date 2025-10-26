@@ -285,8 +285,8 @@ const StaffDashboard = () => {
             <button className="btn btn-danger" onClick={handleStopGps}>
               Stop GPS Sharing
             </button>
-            <button className="btn btn-primary" onClick={handleMarkAttendance}>Mark Attendance</button>
-            <button className="btn btn-danger">Notify Unavailability</button>
+            
+            
           </div>
 
           <button className="btn btn-emergency">🆘 SOS Emergency Alert</button>

@@ -455,3 +455,27 @@
     text-align: center;
   }
 }
+/* Fix for invisible input text and placeholders */
+.form-group input,
+.form-group select {
+  color: #333; /* visible dark text */
+  background-color: #fff; /* ensure input box is white */
+}
+
+/* Make placeholder text visible */
+.form-group input::placeholder {
+  color: #888;
+  opacity: 1;
+}
+
+/* Also fix calendar icon overlap for date inputs */
+input[type="date"] {
+  color-scheme: light;
+}
+
+/* Optional: improve contrast when focused */
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #5a67d8; /* soft purple border */
+  box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+}

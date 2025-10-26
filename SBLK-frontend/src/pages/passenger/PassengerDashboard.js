@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, Marker, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
 import './passengerdashboard.css';
 import axios from 'axios';
@@ -17,7 +17,7 @@ const center = {
 
 const PassengerDashboard = () => {
   const navigate = useNavigate();
-  
+
   // Depot search state
   const [fromLocation, setFromLocation] = useState('Current Location');
   const [toDestination, setToDestination] = useState('');
@@ -31,6 +31,7 @@ const PassengerDashboard = () => {
   const [availableBuses, setAvailableBuses] = useState([]);
 
   const [selectedBus, setSelectedBus] = useState(null);
+  const [userLocation, setUserLocation] = useState(center);
 
   // Profile states
   const [profile, setProfile] = useState(null);
@@ -39,15 +40,17 @@ const PassengerDashboard = () => {
 
   const username = localStorage.getItem('username');
 
+  // Dummy buses (replace with real-time from backend if available)
   const buses = [
-    { id: 1, lat: 6.9271, lng: 79.8612, name: 'Bus 138A' },
-    { id: 2, lat: 6.9301, lng: 79.8702, name: 'Bus 138B' },
+    { id: 1, lat: 6.9271, lng: 79.8612, name: 'Bus 138A', busNumber: '138A' },
+    { id: 2, lat: 6.9301, lng: 79.8702, name: 'Bus 138B', busNumber: '138B' },
   ];
 
-  // Load Google Maps API
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
+
+  const audioRef = useRef(null);
 
   // Fetch passenger profile
   useEffect(() => {
@@ -68,13 +71,28 @@ const PassengerDashboard = () => {
     fetchProfile();
   }, [username]);
 
-  // 🔍 Depot search
+  // Get user's current location
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (err) => console.error('Geolocation error:', err)
+      );
+    }
+  }, []);
+
+  // Depot search
   const handleFindBusSearch = async () => {
     try {
       const res = await axios.get('http://localhost:8080/api/depots/search', {
         params: { fromLocation, destination: toDestination },
       });
-      setAvailableDepots(res.data); // Use separate state
+      setAvailableDepots(res.data);
     } catch (err) {
       console.error('Error searching depots:', err);
       alert('❌ Failed to fetch depots. Please check backend connection.');
@@ -87,7 +105,7 @@ const PassengerDashboard = () => {
       const res = await axios.get(`http://localhost:8080/api/bookings/search`, {
         params: { from: bookingFrom, to: bookingTo, date: travelDate },
       });
-      setAvailableBuses(res.data); // Booking search has its own state
+      setAvailableBuses(res.data);
     } catch (err) {
       console.error('Error fetching available buses:', err);
       alert('❌ Failed to search buses. Check backend connection.');
@@ -112,11 +130,34 @@ const PassengerDashboard = () => {
     }
   };
 
+  // Calculate distance (km) between two coordinates
+  const getDistanceKm = (lat1, lng1, lat2, lng2) => {
+    const toRad = (v) => (v * Math.PI) / 180;
+    const R = 6371; // Earth radius
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  };
+
+  // Alert if bus is within 1 km
+  const handleSetAlert = (bus) => {
+    const distance = getDistanceKm(userLocation.lat, userLocation.lng, bus.lat, bus.lng);
+    if (distance <= 1) {
+      if (audioRef.current) audioRef.current.play();
+      alert(`🚨 Bus ${bus.name} is ${distance.toFixed(2)} km away from you!`);
+    } else {
+      alert(`Bus ${bus.name} is ${distance.toFixed(2)} km away. Alert will trigger when within 1 km.`);
+    }
+  };
+
   return (
     <div className="bus-portal">
       <h1 className="dashboard-title">Smart Public Bus Management System</h1>
 
-      {/* Navigation Tabs */}
       <div className="tabs">
         <button className="tab">Admin Dashboard</button>
         <button className="tab">Staff Interface</button>
@@ -124,8 +165,7 @@ const PassengerDashboard = () => {
       </div>
 
       <div className="content-grid">
-
-        {/* Find Your Bus Section (Depot search) */}
+        {/* Find Your Bus Section */}
         <div className="card find-bus-card">
           <div className="card-header">
             <span className="icon">🔍</span>
@@ -149,12 +189,9 @@ const PassengerDashboard = () => {
                 onChange={(e) => setToDestination(e.target.value)}
                 placeholder="To: Enter Destination"
               />
-              <button className="btn-search" onClick={handleFindBusSearch}>
-                Search
-              </button>
+              <button className="btn-search" onClick={handleFindBusSearch}>Search</button>
             </div>
 
-            {/* Show depot search results */}
             {availableDepots.length > 0 ? (
               <div className="bus-results-grid">
                 {availableDepots.map((bus, index) => (
@@ -162,6 +199,7 @@ const PassengerDashboard = () => {
                     <h3>{bus.busNumber}</h3>
                     <p><strong>From:</strong> {bus.fromLocation}</p>
                     <p><strong>To:</strong> {bus.destination}</p>
+                    <button onClick={() => setSelectedBus(bus)}>Track</button>
                   </div>
                 ))}
               </div>
@@ -214,9 +252,7 @@ const PassengerDashboard = () => {
                 onChange={(e) => setTravelDate(e.target.value)}
               />
             </div>
-            <button className="btn-search-buses" onClick={handleSearchBuses}>
-              Search Buses
-            </button>
+            <button className="btn-search-buses" onClick={handleSearchBuses}>Search Buses</button>
 
             {availableBuses.length > 0 && (
               <div className="available-bus-list">
@@ -245,34 +281,45 @@ const PassengerDashboard = () => {
           <div className="card-body tracking-body">
             <div className="live-badge">LIVE</div>
             <div className="map-placeholder">
-              {isLoaded && (
-                <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
+              {isLoaded ? (
+                <GoogleMap
+                  mapContainerStyle={containerStyle}
+                  center={selectedBus ? { lat: selectedBus.lat, lng: selectedBus.lng } : userLocation}
+                  zoom={selectedBus ? 15 : 13}
+                >
+                  {/* Show all buses */}
                   {buses.map((bus) => (
                     <Marker
                       key={bus.id}
                       position={{ lat: bus.lat, lng: bus.lng }}
                       onClick={() => setSelectedBus(bus)}
-                      icon={{
-                        url: 'https://cdn-icons-png.flaticon.com/512/61/61088.png',
-                        scaledSize: new window.google.maps.Size(35, 35),
-                      }}
+                      icon={{ url: 'https://cdn-icons-png.flaticon.com/512/61/61088.png', scaledSize: new window.google.maps.Size(35, 35) }}
                     />
                   ))}
 
-                  {selectedBus && (
+                  {/* InfoWindow only if selectedBus exists and has coordinates */}
+                  {selectedBus && selectedBus.lat && selectedBus.lng && (
                     <InfoWindow
                       position={{ lat: selectedBus.lat, lng: selectedBus.lng }}
                       onCloseClick={() => setSelectedBus(null)}
                     >
-                      <div>{selectedBus.name}</div>
+                      <div>{selectedBus.busNumber || selectedBus.name}</div>
                     </InfoWindow>
                   )}
                 </GoogleMap>
+              ) : (
+                <p>Loading map...</p>
               )}
-              <div className="eta-box">
-                <p className="eta-label">ETA: 8 minutes</p>
-                <button className="btn-alert">Set Alert (1km away)</button>
-              </div>
+
+              {selectedBus && (
+                <div className="eta-box">
+                  <p className="eta-label">ETA: ~8 minutes</p>
+                  <button className="btn-alert" onClick={() => handleSetAlert(selectedBus)}>
+                    Set Alert (1km away)
+                  </button>
+                </div>
+              )}
+              {!selectedBus && <p style={{ color: 'white' }}>Click "Track" on a bus to view its live location.</p>}
             </div>
           </div>
         </div>
@@ -320,6 +367,9 @@ const PassengerDashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Audio for alert */}
+      <audio ref={audioRef} src="/alert_sound.mp3" preload="auto" />
     </div>
   );
 };

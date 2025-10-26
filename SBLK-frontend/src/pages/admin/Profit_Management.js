@@ -22,12 +22,14 @@ const AdminProfitManagement = () => {
 
   const API_BASE = "http://localhost:8080/api/profit";
 
-  // Fetch bus numbers when depot changes
+  // ✅ Fetch bus numbers when depot changes
   useEffect(() => {
     if (selectedDepot) {
       fetch(`${API_BASE}/busNumbers/${selectedDepot}`)
         .then(res => res.json())
-        .then(data => setBusNumbers(data))
+        .then(data => {
+          setBusNumbers(data || []);
+        })
         .catch(err => console.error('Error fetching bus numbers:', err));
     } else {
       setBusNumbers([]);
@@ -64,7 +66,7 @@ const AdminProfitManagement = () => {
     }
   }, [selectedBus]);
 
-  // Add new profit entry
+  // ✅ Add new profit entry
   const handleSubmit = async () => {
     if (!selectedDepot || !selectedBus || !totalCollection) {
       alert("Please fill in all required fields");
@@ -160,17 +162,6 @@ const AdminProfitManagement = () => {
             </div>
           </div>
 
-          {/* Monthly Profit Trend */}
-          <div className="card1">
-            <div className="card-header">
-              <span className="icon">📊</span>
-              <h2>Monthly Profit Trend</h2>
-            </div>
-            <div className="chart-placeholder">
-              <p>Interactive Line Chart - Monthly Profit vs Revenue vs Expenses</p>
-            </div>
-          </div>
-
           {/* Daily Collection by Bus */}
           <div className="card1">
             <div className="card-header">
@@ -190,33 +181,6 @@ const AdminProfitManagement = () => {
               ) : (
                 <p style={{ textAlign: 'center' }}>No collection data yet.</p>
               )}
-            </div>
-          </div>
-
-          {/* Annual Profit Analysis */}
-          <div className="card1">
-            <div className="card-header">
-              <span className="icon">📈</span>
-              <h2>Annual Profit Analysis</h2>
-            </div>
-            <div className="chart-placeholder">
-              <p>Interactive Bar Chart - Annual Profit Comparison (2023-2025)</p>
-            </div>
-          </div>
-
-          {/* Generate Reports */}
-          <div className="card1">
-            <div className="card-header">
-              <span className="icon">📄</span>
-              <h2>Generate Reports</h2>
-            </div>
-            <p className="report-desc">Generate detailed financial reports for analysis and regulatory compliance</p>
-            <div className="report-buttons">
-              <button className="report-btn green">Monthly Profit Report</button>
-              <button className="report-btn green">Annual Financial Report</button>
-              <button className="report-btn dark">Expense Analysis</button>
-              <button className="report-btn dark">Bus-By-Route Report</button>
-              <button className="report-btn dark">Tax Report</button>
             </div>
           </div>
         </div>
@@ -248,11 +212,12 @@ const AdminProfitManagement = () => {
                   value={selectedDepot}
                   onChange={(e) => setSelectedDepot(e.target.value)}
                 >
-                  <option value="">Select Depot</option>
-                  <option value="Colombo">Colombo</option>
+          
+                  <option value="Colombo" selected>Colombo</option>
+                  <option value="Kandy">Kandy</option>
                   <option value="Galle">Galle</option>
                   <option value="Horana">Horana</option>
-                  <option value="Mathara">Mathara</option>
+                  <option value="Matara">Matara</option>
                 </select>
               </div>
 
@@ -261,6 +226,7 @@ const AdminProfitManagement = () => {
                 <select 
                   value={selectedBus}
                   onChange={(e) => setSelectedBus(e.target.value)}
+                  disabled={!busNumbers.length}
                 >
                   <option value="">Select Bus</option>
                   {busNumbers.map((bus, index) => (
@@ -302,51 +268,6 @@ const AdminProfitManagement = () => {
               <button onClick={handleSubmit} className="submit-btn">
                 + Add Collection Entry
               </button>
-            </div>
-          </div>
-
-          {/* Expense Breakdown */}
-          <div className="card1">
-            <div className="card-header">
-              <span className="icon">💰</span>
-              <h2>Expense Breakdown</h2>
-            </div>
-            <div className="expense-list">
-              <div className="expense-item">
-                <div className="expense-info">
-                  <span className="expense-icon fuel">⛽</span>
-                  <span className="expense-name">Fuel Costs</span>
-                </div>
-                <span className="expense-amount">Rs2.2M</span>
-              </div>
-              <div className="expense-item">
-                <div className="expense-info">
-                  <span className="expense-icon maintenance">🔧</span>
-                  <span className="expense-name">Maintenance</span>
-                </div>
-                <span className="expense-amount">Rs850K</span>
-              </div>
-              <div className="expense-item">
-                <div className="expense-info">
-                  <span className="expense-icon driver">👨‍✈️</span>
-                  <span className="expense-name">Driver Salaries</span>
-                </div>
-                <span className="expense-amount">Rs1.5M</span>
-              </div>
-              <div className="expense-item">
-                <div className="expense-info">
-                  <span className="expense-icon road">🛣️</span>
-                  <span className="expense-name">Road Taxes</span>
-                </div>
-                <span className="expense-amount">Rs450K</span>
-              </div>
-              <div className="expense-item">
-                <div className="expense-info">
-                  <span className="expense-icon insurance">🛡️</span>
-                  <span className="expense-name">Insurance</span>
-                </div>
-                <span className="expense-amount">Rs320K</span>
-              </div>
             </div>
           </div>
         </div>
