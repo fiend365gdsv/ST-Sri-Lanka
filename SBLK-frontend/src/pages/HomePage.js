@@ -35,7 +35,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-text">
-          <h1>Smart Public Bus Management System</h1>
+          <h1>Smart Transport Sri Lanka</h1>
           <p>
             Revolutionizing public transport in Sri Lanka with real-time tracking,
             online booking, and intelligent management for passengers, drivers,
