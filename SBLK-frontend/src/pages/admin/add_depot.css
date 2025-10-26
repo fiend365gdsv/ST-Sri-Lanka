@@ -1,0 +1,150 @@
+/* ========== BusManagementSystem.css ========== */
+
+.bus-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.bus-title {
+  color: white;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabs */
+.tabs1{
+    text-align: center;
+}
+.tabs {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  padding: 5px;
+  margin-bottom: 30px;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab.active {
+  background: white;
+  color: #333;
+}
+
+/* Form Container */
+.form-container-depot {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: rgb(95, 115, 225);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.form-header-depot {
+  background: linear-gradient(135deg, #ff4528 0%, #fcff63 100%);
+  padding: 20px;
+}
+
+.form-title {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-content-depot {
+  padding: 40px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group-depot {
+  display: flex;
+  flex-direction: column;
+  color: rgb(44, 43, 43);
+}
+
+.l-depot {
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+input,
+select,
+textarea {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  backdrop-filter: blur(10px);
+}
+
+.input-color-depot {
+  
+  color: rgb(0, 0, 0);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  font-family: Arial, sans-serif;
+}
+
+.full-width {
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.back-button,
+.register-button {
+  padding: 12px 40px;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button {
+  background-color: #ef4444;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.register-button {
+  background-color: #48bb78;
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+}

@@ -1,0 +1,69 @@
+/* src/pages/LoginPage.css */
+.auth-container {
+  background-image: url('/public/images/1_sQ9uJ3FFLpWe5mJHovv-zw.jpg'); /* path from public folder */
+  background-color: #beccf4;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /*background: linear-gradient(to bottom right, #b07fff, #ffaeae);*/
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.auth-box {
+  background: linear-gradient(to bottom right, #c6adee, #a8c4da);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.9);
+  text-align: center;
+  border: 6px solid #333; /* dark border */
+}
+
+.auth-box:hover {
+  background: linear-gradient(to bottom right, #d2a2de, #94e1ee);
+}
+
+.auth-box h2 {
+  margin-bottom: 24px;
+  color: #3c00ff;
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #484ef1;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.auth-box button:hover {
+  background-color: #183182;
+}
+
+.switch-link {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+.switch-link a {
+  color: #0077b6;
+  text-decoration: none;
+}
+

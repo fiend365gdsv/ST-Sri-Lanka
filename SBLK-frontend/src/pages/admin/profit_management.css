@@ -1,0 +1,457 @@
+/* Container */
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.dashboard-title {
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* Tabs */
+.tabs {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  padding: 5px;
+  margin-bottom: 30px;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab.active {
+  background: white;
+  color: #333;
+}
+
+/* Profit Bar */
+.profit-bar {
+  background-color: #ff7675;
+  padding: 15px 25px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profit-label {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.back-btn {
+  background-color: white;
+  color: #ff7675;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Main Content */
+.main-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.left-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card */
+.card1 {
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.card-header .icon {
+  font-size: 20px;
+}
+
+.card-header h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+/* Profit Cards */
+.profit-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.profit-card {
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+}
+
+.profit-card.pink {
+  background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+}
+
+.profit-card.cyan {
+  background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+}
+
+.profit-card h3 {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.profit-card p {
+  font-size: 14px;
+  margin: 0 0 8px 0;
+  opacity: 0.9;
+}
+
+.profit-card .trend {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Metrics */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.metric-item {
+  text-align: center;
+}
+
+.metric-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.metric-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Chart Placeholder */
+.chart-placeholder {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.chart-placeholder p {
+  color: #999;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Bus Collection Grid */
+.bus-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.bus-card {
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+}
+
+.bus-card.blue {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bus-card.purple {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.bus-card.indigo {
+  background: linear-gradient(135deg, #5f72bd 0%, #9921e8 100%);
+}
+
+.bus-card.violet {
+  background: linear-gradient(135deg, #7c4dff 0%, #6c63ff 100%);
+}
+
+.bus-card h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.bus-card .route {
+  font-size: 12px;
+  margin: 0 0 5px 0;
+  opacity: 0.9;
+}
+
+.bus-card .passengers {
+  font-size: 11px;
+  margin: 0 0 12px 0;
+  opacity: 0.8;
+}
+
+.bus-card .collection-amount {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Reports */
+.report-desc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.report-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.report-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.report-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.report-btn.green {
+  background-color: #10b981;
+}
+
+.report-btn.dark {
+  background-color: #4b5563;
+}
+
+/* Collection Form */
+.collection-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-group select {
+  background-color: white;
+  cursor: pointer;
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.submit-btn {
+  background-color: #667eea;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+}
+
+/* Expense List */
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.expense-item:last-child {
+  border-bottom: none;
+}
+
+.expense-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.expense-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.expense-icon.fuel {
+  background-color: #ff6b6b;
+}
+
+.expense-icon.maintenance {
+  background-color: #4ecdc4;
+}
+
+.expense-icon.driver {
+  background-color: #667eea;
+}
+
+.expense-icon.road {
+  background-color: #feca57;
+}
+
+.expense-icon.insurance {
+  background-color: #ff9ff3;
+}
+
+.expense-name {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.expense-amount {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff6b6b;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .bus-collection-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-tabs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .profit-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+  
+  .profit-bar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}

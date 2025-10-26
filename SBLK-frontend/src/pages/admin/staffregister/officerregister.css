@@ -1,0 +1,149 @@
+/* ========== BusManagementSystem.css ========== */
+
+.bus-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.bus-title {
+  color: white;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabs */
+.tab-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto 30px;
+}
+
+.tab {
+  flex: 1;
+  padding: 15px 30px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.active-tab {
+  background-color: white;
+  color: #667eea;
+}
+
+/* Form Container */
+.form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: rgb(148, 222, 243);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.form-header {
+  background: linear-gradient(135deg, #5eead4 0%, #48bb78 100%);
+  padding: 20px;
+}
+
+.form-title {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-content {
+  padding: 40px;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.1) 0%,
+    rgba(118, 75, 162, 0.1) 100%
+  );
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.officer-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.officer-label {
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 2px rgb(153, 183, 249);
+}
+
+input,
+select,
+textarea {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  backdrop-filter: blur(10px);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  font-family: Arial, sans-serif;
+}
+
+.full-width {
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.back-button,
+.register-button {
+  padding: 12px 40px;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button {
+  background-color: #ef4444;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.register-button {
+  background-color: #48bb78;
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+}

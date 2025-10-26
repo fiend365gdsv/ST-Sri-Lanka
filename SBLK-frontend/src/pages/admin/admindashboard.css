@@ -1,0 +1,180 @@
+/* admindashboard.css */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  padding: 30px;
+  text-align: center;
+  background: linear-gradient(135deg, #5b67f1, #9245e6);
+  color: #333;
+}
+
+.dashboard-title {
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* Tabs */
+.tabs {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  padding: 5px;
+  margin-bottom: 30px;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab.active {
+  background: white;
+  color: #333;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  background: #f56539;
+  color: white;
+  font-weight: 600;
+  padding: 10px 15px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.stat-item h2 {
+  color: #333;
+  font-size: 28px;
+  margin: 0;
+}
+
+.stat-item p {
+  color: #666;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row-buttons {
+  justify-content: center;
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background: #f56539;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #e1532e;
+}
+
+.full-button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Fleet Section */
+.bus-item {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: left;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.bus-item:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.route-name {
+  color: #007d60;
+  font-weight: 600;
+}
+
+.update-info {
+  font-size: 12px;
+  color: #777;
+}
+
+/* Staff Section */
+.staff-item {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.staff-name {
+  font-weight: 600;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .row-buttons {
+    flex-direction: column;
+  }
+}

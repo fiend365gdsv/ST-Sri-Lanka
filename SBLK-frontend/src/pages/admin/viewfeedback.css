@@ -1,0 +1,71 @@
+.feedback-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+  color: white;
+  padding: 40px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.feedback-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.feedback-subtitle {
+  text-align: center;
+  color: #cfd8dc;
+  margin-bottom: 30px;
+}
+
+.feedback-table-container {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  overflow-x: auto;
+}
+
+.feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.feedback-table th, .feedback-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  text-align: left;
+}
+
+.feedback-table th {
+  background-color: rgba(255,255,255,0.1);
+  font-weight: 600;
+}
+
+.feedback-table tr:hover {
+  background-color: rgba(255,255,255,0.05);
+}
+
+.no-data {
+  text-align: center;
+  color: #ccc;
+  padding: 20px;
+}
+
+.back-btn {
+  margin-top: 30px;
+  display: block;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #1976d2;
+}

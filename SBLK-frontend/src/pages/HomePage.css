@@ -1,0 +1,188 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.header ul li:hover {
+  text-decoration: underline;
+  color: #ffd580;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background: linear-gradient(90deg, #938ce8, #a86ef7);
+  color: white;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.header ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.header li {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn {
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.signin {
+  background: white;
+  color: #5b4bfc;
+}
+
+.signup {
+  background: #ff6b00;
+  color: white;
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 100px;
+  background: linear-gradient(135deg, #715cff, #b984ff);
+  color: white;
+}
+
+.hero-text {
+  max-width: 500px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.hero-buttons .btn {
+  margin-right: 12px;
+}
+
+.get-started {
+  background: #ff6b00;
+  color: white;
+}
+
+.learn-more {
+  background: white;
+  color: #5b4bfc;
+}
+
+.hero-image img {
+  width: 550px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+/* Features */
+.features {
+  text-align: center;
+  padding: 70px 100px;
+  background: #dbd2e1;
+}
+
+
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Roles */
+.roles {
+  background: #f4f3ff;
+  text-align: center;
+  padding: 80px 100px;
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.role-card {
+  background: linear-gradient(135deg, #705cff, #a073ff);
+  color: white;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: left;
+}
+
+.role-card ul {
+  list-style: none;
+  padding-left: 15px;
+}
+
+.role-card li {
+  margin-bottom: 8px;
+}
+
+/* Footer */
+.footer {
+  background: #202040;
+  color: #ddd;
+  padding: 50px 80px 20px;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 40px;
+}
+
+.footer h3, .footer h4 {
+  color: white;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #999;
+}

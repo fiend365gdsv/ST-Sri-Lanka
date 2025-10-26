@@ -1,0 +1,386 @@
+
+
+
+
+/* Dashboard Container */
+.dashboard1 {
+  min-height: 100vh;
+  text-align: center;
+  background: linear-gradient(135deg, #7c5ce5 0%, #a98ce5 100%);
+  padding: 30px;
+}
+
+.dashboard-title {
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* Tabs */
+.tabs {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  padding: 5px;
+  margin-bottom: 30px;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab.active {
+  background: white;
+  color: #333;
+}
+
+/* Analytics Header */
+.analytics-header {
+  background: linear-gradient(90deg, #f45f5a 0%, #ffb088 100%);
+  padding: 18px 30px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.analytics-header h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.btn-back {
+  background: rgba(255, 255, 255, 0.35);
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 10px 28px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Filters Container */
+.filters-container {
+  background: rgb(248, 245, 245);
+  padding: 20px 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) auto;
+  gap: 15px;
+  align-items: end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-group label {
+  font-size: 13px;
+  color: #272727;
+  font-weight: 500;
+}
+
+.filter-group select,
+.filter-group input {
+  padding: 9px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  background: rgb(255, 219, 219);
+  cursor: pointer;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+  outline: none;
+  border-color: #7c5ce5;
+}
+
+.btn-apply {
+  background: #7c5ce5;
+  color: white;
+  border: none;
+  padding: 9px 25px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 38px;
+  transition: all 0.2s ease;
+}
+
+.btn-apply:hover {
+  background: #6b4dd4;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: white;
+  padding: 22px 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 42px;
+  color: #7c5ce5;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.stat-change {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.stat-change.positive {
+  color: #4caf50;
+}
+
+.stat-change.negative {
+  color: #ff5252;
+}
+
+/* Charts Row */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.chart-card {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.chart-icon {
+  font-size: 18px;
+}
+
+.chart-header h3 {
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.chart-placeholder {
+  height: 280px;
+  background: linear-gradient(135deg, #e8ebf0 0%, #f0f2f5 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 15px;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Tables Row */
+.tables-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.table-card {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f5f5f5;
+}
+
+.table-header h3 {
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.table-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: #f8f9fc;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.table-row:hover {
+  background: #eef0f7;
+}
+
+/* Route Info */
+.route-info,
+.driver-info {
+  flex: 1;
+}
+
+.route-name,
+.driver-name {
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.route-details,
+.driver-details {
+  font-size: 12px;
+  color: #888;
+  font-weight: 500;
+}
+
+/* Badges */
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-low {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge-medium {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.badge-high {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Performance Rate */
+.performance-rate {
+  text-align: right;
+}
+
+.rate-value {
+  font-size: 26px;
+  color: #7c5ce5;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.rate-label {
+  font-size: 11px;
+  color: #888;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .filters-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .btn-apply {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .tables-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-tabs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .nav-tab {
+    padding: 14px 20px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filters-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .btn-apply {
+    grid-column: 1;
+  }
+  
+  .analytics-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
