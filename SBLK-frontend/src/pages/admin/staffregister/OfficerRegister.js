@@ -91,7 +91,7 @@ const OfficerRegister = () => {
   };
 
   const handleBack = () => {
-    navigate("/admindashboard");
+    navigate("/admin/dashboard");
   };
 
   return (

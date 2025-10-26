@@ -76,7 +76,7 @@ const AdminSendAlert = () => {
           ></textarea>
 
           <div className="button-row">
-            <button className="btn cancel" onClick={() => navigate("/admindashboard")}>
+            <button className="btn cancel" onClick={() => navigate("/admin/dashboard")}>
               Cancel
             </button>
             <button className="btn send" onClick={handleSend} disabled={loading}>

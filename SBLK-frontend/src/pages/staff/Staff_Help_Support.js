@@ -25,7 +25,7 @@ const StaffHelpSupport = () => {
           <textarea className="textarea-field" placeholder="Enter Your Help & Support"></textarea>
 
           <div className="button-row">
-            <button className="btn cancel" onClick={()=>navigate("/staff_dashboard")}>Cancel</button>
+            <button className="btn cancel" onClick={()=>navigate("/staff/dashboard")}>Cancel</button>
             <button className="btn send">Submit</button>
           </div>
         </div>

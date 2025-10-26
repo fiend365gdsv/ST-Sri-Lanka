@@ -247,7 +247,7 @@ const PassengerEditProfile = () => {
           </div>
 
           <div className="button-container">
-            <button className="back-button" onClick={() => navigate('/passengerdashboard')}>
+            <button className="back-button" onClick={() => navigate('/passenger/dashboard')}>
               Back
             </button>
             <button className="register-button" onClick={handleUpdate}>

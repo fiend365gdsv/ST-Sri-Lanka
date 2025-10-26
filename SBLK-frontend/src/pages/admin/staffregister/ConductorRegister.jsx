@@ -91,7 +91,7 @@ const ConductorRegister = () => {
   };
 
   const handleBack = () => {
-    navigate("/admindashboard");
+    navigate("/admin/dashboard");
   };
 
   return (

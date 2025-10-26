@@ -117,7 +117,7 @@ const AdminProfitManagement = () => {
       {/* Profit Management Bar */}
       <div className="profit-bar">
         <span className="profit-label">Profit Management</span>
-        <button className="back-btn" onClick={() => navigate("/admindashboard")}>Back to Dashboard</button>
+        <button className="back-btn" onClick={() => navigate("/admin/dashboard")}>Back to Dashboard</button>
       </div>
 
       <div className="main-content">

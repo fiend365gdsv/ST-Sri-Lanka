@@ -95,7 +95,7 @@ const DriverRegister = () => {
   };
 
   const handleBack = () => {
-    navigate("/admindashboard");
+    navigate("/admin/dashboard");
   };
 
   return (

@@ -67,7 +67,7 @@ const ViewAnalytics = () => {
       {/* Analytics Header */}
       <div className="analytics-header">
         <h2>View Analytics</h2>
-        <button className="btn-back" onClick={()=>navigate("/admindashboard")}>Back to Dashboard</button>
+        <button className="btn-back" onClick={()=>navigate("/admin/dashboard")}>Back to Dashboard</button>
       </div>
 
       {/* Filters */}

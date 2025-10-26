@@ -91,7 +91,7 @@ const AdminRegister = () => {
   };
 
   const handleBack = () => {
-    navigate("/admindashboard");
+    navigate("/admin/dashboard");
   };
 
   return (

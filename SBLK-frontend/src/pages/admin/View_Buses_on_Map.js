@@ -119,7 +119,7 @@ const ViewBusesonMap = () => {
       </div>
 
       <div className="dashboard-header">
-        <button className="back-btn" onClick={() => navigate("/admindashboard")}>Back</button>
+        <button className="back-btn" onClick={() => navigate("/admin/dashboard")}>Back</button>
         <div className="header-content">
           <span className="header-icon">🚌</span>
           <h2 className="page-title">Fleet Management - Live Tracking</h2>

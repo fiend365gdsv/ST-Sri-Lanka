@@ -25,7 +25,7 @@ const PassengerSupport = () => {
           <textarea className="textarea-field" placeholder="Enter Help / Support"></textarea>
 
           <div className="button-row">
-            <button className="btn cancel" onClick={()=>navigate("/passengerdashboard")}>Cancel</button>
+            <button className="btn cancel" onClick={()=>navigate("/passenger/dashboard")}>Cancel</button>
             <button className="btn send">Submit</button>
           </div>
         </div>
