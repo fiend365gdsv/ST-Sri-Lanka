@@ -1,99 +1,71 @@
-1. 🧩 Introduction
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&text=Welcome%20to%20My%20Project!&color=gradient&height=100&fontSize=40" />
+</div>
 
-1.1 🎯 Purpose
+<h1 align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/213844263-a8897a51-32f4-4b3b-b5c2-e1528b89f6f3.png" width="50px" /> Smart Transport Sri Lanka
+</h1>
 
-The Smart Public Bus Management & Tracking System aims to modernize public transportation in Sri Lanka by introducing real-time tracking, digital staff coordination, online ticket booking, and automated alerts.
-It enhances efficiency, transparency, and passenger satisfaction across the national bus transport network.
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&pause=1000&width=600&lines=Modern+Public+Transport+in+Sri+Lanka;Real-Time+Bus+Tracking;Online+Ticket+Booking;Digital+Staff+Management;Automated+Alerts" />
+</p>
 
-1.2 🌐 Scope
+<div align="center">
 
-The system is a web-based platform designed for three main user types:
+### 🌟 Turning Ideas into Smarter, Digital Transportation Solutions 🌟
 
-🧑‍💼 Admins / Transport Officers – Manage buses, routes, and staff.
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700" />
 
-🧑‍✈️ Drivers & Conductors – Share live GPS locations and manage daily operations.
+<!-- Social Media Links with Animated Badges -->
+<p>
+<a href="https://github.com/fiend365gdsv"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white&color=black"/></a>
+<a href="https://www.linkedin.com/in/senura-vinodya-170462371"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
+<a href="mailto:senuravinodya2002@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
+<a href="#"><img src="https://img.shields.io/badge/Portfolio-FF5722?style=for-the-badge&logo=google-chrome&logoColor=white"/></a>
+</p>
 
-🧍‍♂️ Passengers – Track buses, book tickets, and receive notifications.
+</div>
 
-Core Capabilities:
+---
 
-Real-time GPS tracking of buses
+## 📖 Introduction
 
-Online ticket booking
+### 🎯 Purpose
+The **Smart Public Bus Management & Tracking System** modernizes public transportation in Sri Lanka with:
 
-Staff attendance and assignment
+- Real-time GPS tracking of buses  
+- Online ticket booking  
+- Staff rotes and schedules  
+- Alerts for delays, emergencies, or updates  
+ 
 
-Alerts for delays, emergencies, or updates
+### 🌐 Scope
+The system is designed for three main users:
 
-Automated reporting and analytics
+- 🧑‍💼 **Admins / Transport Officers** – Manage buses, routes, and staff  
+- 🧑‍✈️ **Drivers & Conductors** – Share live GPS locations and manage daily operations  
+- 🧍‍♂️ **Passengers** – Track buses, book tickets, and receive notifications  
 
-1.3 🔁 Lifecycle Model
+---
 
-The system follows the Agile Software Development Life Cycle (SDLC):
+## 🏗️ Overall Description
 
-📝 Planning & Requirement Analysis
+### 🌍 Product Perspective
+Modular and scalable system, integrated with:
 
-🧠 Design & Prototyping
+- GPS & Map APIs  
+- Online payment gateways  
+- Government transport databases (SLTB)
 
-💻 Development
+### 👥 User Roles & Permissions
 
-🧪 Testing
+| Role | Capabilities |
+| ---- | ------------ |
+| **Admin / Transport Officers** | Manage routes, schedules, staff; monitor buses in real-time; push alerts; view reports |
+| **Drivers & Conductors** | Secure login; start/stop GPS tracking; mark attendance/unavailability; trigger SOS alerts |
+| **Passengers** | Register/login; browse buses; track buses live; receive proximity alerts; book tickets; submit feedback |
 
-🚀 Deployment
-
-🔧 Maintenance & Iteration
-
-This ensures flexibility, stakeholder feedback, and rapid iteration for improvement.
-
-2. 🏗️ Overall Description
-2.1 🌍 Product Perspective
-
-The system is modular and scalable, designed to integrate with:
-
-GPS & Map APIs
-
-Online payment gateways
-
-Government transport databases (e.g., SLTB system
-
-2.2 👥 User Roles & Permissions
-🧑‍💼 Admin / Transport Officers
-
-Manage routes, schedules, and staff
-
-Monitor buses in real time
-
-View reports (daily collection, trip counts, delays, etc.)
-
-Push alerts for emergencies or announcements
-
-Track profit (monthly, annual)
-
-🧑‍✈️ Drivers & Conductors
-
-Secure login access
-
-Start/stop GPS tracking
-
-Mark attendance/unavailability
-
-Trigger SOS alerts
-
-🧍‍♂️ Passengers
-
-Register/login
-
-Browse buses by route/time
-
-Track buses live on map
-
-Receive alerts when bus nears location
-
-Book tickets & view trip history
-
-Submit complaints or feedback
-
-2.3 ⚙️ Operating Environment
+### ⚙️ Operating Environment
 
 | Component            | Technology                                                                      |
 | -------------------- | ------------------------------------------------------------------------------- |
@@ -102,60 +74,52 @@ Submit complaints or feedback
 | **Authentication**   | Spring Security + JWT                                                           |
 | **Realtime Updates** | Firebase Realtime Database                                                      |
 | **Database**         | MySQL, MongoDB                                                                  |
-| **Map & Location**   | Leaflet.js + OpenStreetMap API                                                  |
+| **Map & Location**   | Google Map API                                                                  |
 | **Notifications**    | Firebase Cloud Messaging / Push.js                                              |
 | **Hosting**          | Vercel (Frontend), Render/Railway (Backend), MongoDB Atlas, PlanetScale (MySQL) |
 
+---
 
-3. 🚦 System Features
+## 🚦 System Features
 
-| No   | Feature                  | Description                          | User Role        |
-| ---- | ------------------------ | ------------------------------------ | ---------------- |
-| i    | **Route Management**     | Define and update routes/schedules   | Admin            |
-| ii   | **Staff Assignment**     | Assign drivers & conductors to buses | Admin            |
-| iii  | **Real-Time Tracking**   | GPS-based live tracking              | Admin, Passenger |
-| iv   | **Location Sharing**     | Drivers share current GPS location   | Driver           |
-| v    | **Ticket Booking**       | Passengers reserve seats online      | Passenger        |
-| vi   | **Notifications**        | Send alerts & updates                | All Users        |
-| vii  | **SOS Function**         | Emergency alert to control center    | Driver           |
-| viii | **Analytics Dashboard**  | View operational insights            | Admin            |
-| ix   | **Feedback & Reporting** | Submit complaints/suggestions        | Passenger        |
+| Feature                  | Description                          | User Role        |
+| ------------------------ | ------------------------------------ | ---------------- |
+| **Route Management**     | Define & update routes/schedules     | Admin            |
+| **Staff Assignment**     | Assign drivers & conductors to buses | Admin            |
+| **Real-Time Tracking**   | GPS-based live tracking               | Admin, Passenger |
+| **Location Sharing**     | Drivers share current GPS location   | Driver           |
+| **Ticket Booking**       | Passengers reserve seats online      | Passenger        |
+| **Notifications**        | Send alerts & updates                | All Users        |
+| **SOS Function**         | Emergency alert to control center    | Driver           |
+| **Analytics Dashboard**  | View operational insights            | Admin            |
+| **Feedback & Reporting** | Submit complaints/suggestions        | Passenger        |
 
+---
 
-4. ⚙️ Functional Requirements
-🧑‍💼 Admin Panel
+## ⚙️ Functional Requirements
 
-Add/Edit/Delete routes
+### 🧑‍💼 Admin Panel
+- Add/Edit/Delete routes  
+- Assign staff to buses  
+- View real-time locations  
+- Push emergency alerts  
 
-Assign staff to buses
+### 🧑‍✈️ Driver / Conductor Panel
+- Login to view schedule  
+- Start GPS tracking  
+- Mark attendance/unavailability  
+- Send SOS alert  
 
-View real-time locations
+### 🧍‍♂️ Passenger Module
+- Register/login  
+- Search buses & book tickets  
+- Track bus in real-time  
+- Receive proximity alerts  
+- Submit feedback  
 
-Push emergency alerts
+---
 
-🧑‍✈️ Driver / Conductor Panel
-
-Login to view schedule
-
-Start GPS tracking
-
-Mark attendance/unavailability
-
-Send SOS alert
-
-🧍‍♂️ Passenger Module
-
-Register/login
-
-Search buses & book tickets
-
-Track bus in real-time
-
-Receive proximity alerts
-
-Submit feedback
-
-5. 🧠 Non-Functional Requirements
+## 🧠 Non-Functional Requirements
 
 | Aspect           | Description                                        |
 | ---------------- | -------------------------------------------------- |
@@ -165,32 +129,25 @@ Submit feedback
 | **Usability**    | Intuitive, mobile-responsive UI                    |
 | **Availability** | 99.5% uptime with automatic backups                |
 
+---
 
-6. ⚖️ Assumptions & Constraints
+## ⚖️ Assumptions & Constraints
+- All buses have GPS-enabled devices.  
+- Continuous internet connectivity required for live tracking.  
+- SLTB collaboration necessary for staff & route data.  
 
-All buses have GPS-enabled devices.
+---
 
-Continuous internet connectivity required for live tracking.
+## 🚀 Future Enhancements
+- 📱 Android & iOS mobile apps  
+- 🧾 QR-based ticket validation  
+- 🤖 AI-driven route optimization (traffic-aware rerouting)  
+- 🏛 Integration with National Transport APIs  
+- 📊 Predictive analytics and passenger flow forecasts  
 
-SLTB collaboration necessary for staff & route data.
+---
 
-
-
-7. 🚀 Future Enhancements
-
-📱 Android & iOS mobile apps
-
-🧾 QR-based ticket validation
-
-🤖 AI-driven route optimization (traffic-aware rerouting)
-
-🏛 Integration with National Transport APIs
-
-📊 Predictive analytics and passenger flow forecasts
-
-
-
-💻 Technology Stack Summary
+## 💻 Technology Stack
 
 | Layer               | Tools & Frameworks                        |
 | ------------------- | ----------------------------------------- |
@@ -201,16 +158,13 @@ SLTB collaboration necessary for staff & route data.
 | **Deployment**      | Vercel, Render, Railway                   |
 | **Version Control** | Git & GitHub                              |
 
+---
 
+## 👨‍💼 Developed By
+**Senura Vinodya** – Full Stack Developer  
 
-👨‍💼 Developed By
+---
 
-Senura Vinodya - Full Stack Developer
-
-
-🏁 License
-
-This project is developed as part of the Higher National Diploma in Software Engineering (HNDSE) final project and is open for academic reference.
-© 2025 National Institute of Business Management (NIBM), Colombo 07
-
-
+## 🏁 License
+This project is part of the **Higher National Diploma in Software Engineering (HNDSE)** final project at NIBM, Colombo 07. Open for academic reference. © 2025
+y
